@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Task Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: url("{{ url_for('static', filename='db.jpg') }}") no-repeat center center/cover;
+      color: #333;
+    }
+
+    .dashboard-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.638);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff6600;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    form input, form textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+      resize: none;
+    }
+
+    form button {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #ffcc00, #ff6600);
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    form button:hover {
+      background: linear-gradient(45deg, #fff, #ddd);
+      transform: scale(1.05);
+    }
+
+    h3 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    .tasks-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .task-card {
+      background: #f9f9f9;
+      border-radius: 15px;
+      width: 250px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .task-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .task-card h4 {
+      margin: 0 0 10px 0;
+      color: #ff6600;
+    }
+
+    .task-card p {
+      font-size: 0.95rem;
+      color: #555;
+      min-height: 40px;
+    }
+
+    .task-card .status {
+      margin: 10px 0;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .status.Pending {
+  background: #f39c12;
+}
+
+.status.In-Progress {
+  background: #3498db;
+}
+
+.status.Completed {
+  background: #2ecc71;
+}
+
+
+    .task-card .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .task-card .actions a {
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .task-card .actions a.start {
+      background: #3498db;
+    }
+
+    .task-card .actions a.complete {
+      background: #2ecc71;
+    }
+
+    .task-card .actions a.delete {
+      background: #e74c3c;
+    }
+
+    .task-card .actions a:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Welcome, {{ username }}!</h2>
+
+    <form method="POST" action="{{ url_for('add_task') }}">
+      <input type="text" name="title" placeholder="Task Title" required>
+      <textarea name="description" placeholder="Task Description"></textarea>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <h3>Your Tasks</h3>
+    <div class="tasks-container">
+      {% for task in tasks %}
+      <div class="task-card">
+        <h4>{{ task.title }}</h4>
+        <p>{{ task.description }}</p>
+        <span class="status {{ task.status|replace(' ', '-') }}">{{ task.status }}</span>
+        <div class="actions">
+          <a href="{{ url_for('update_task', task_id=task.id, status='In Progress') }}" class="start">Start</a>
+          <a href="{{ url_for('update_task', task_id=task.id, status='Completed') }}" class="complete">Complete</a>
+          <a href="{{ url_for('delete_task', task_id=task.id) }}" class="delete">Delete</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: #333;
+  padding: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+form input, form textarea, form button {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+}
+
+button {
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table, th, td {
+  border: 1px solid #333;
+  padding: 8px;
+}
+
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.alert.success { background: #c8e6c9; }
+.alert.danger { background: #ffcdd2; }
+.alert.info { background: #bbdefb; }
+

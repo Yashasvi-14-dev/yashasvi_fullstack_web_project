@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      background: url("{{ url_for('static', filename='tsk.jpg') }}") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 50px;
+      border-radius: 15px;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .highlight {
+      color: #ffcc00;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 5px;
+      font-size: 1rem;
+      border-radius: 25px;
+      background: #ffcc00;
+      color: #333;
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: #333;
+      transform: scale(1.05);
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: #333;
+    }
+
+    .btn.secondary:hover {
+      background: #ffcc00;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Welcome to <span class="highlight">Task Manager</span></h1>
+    <p>Organize your tasks effectively and boost productivity 🚀</p>
+    {% if 'user_id' not in session %}
+      <a href="{{ url_for('register') }}" class="btn">Get Started</a>
+      <a href="{{ url_for('login') }}" class="btn secondary">Login</a>
+    {% else %}
+      <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+    {% endif %}
+  </div>
+</body>
+</html>

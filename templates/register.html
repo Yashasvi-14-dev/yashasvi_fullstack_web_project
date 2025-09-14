@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Task Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+      background: url("{{ url_for('static', filename='register.jpg') }}") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .register-box {
+      background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(50,50,50,0.7));
+      padding: 40px;
+      border-radius: 20px;
+      width: 380px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .register-box h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #00e676;
+    }
+
+    .register-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #00e676;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1rem;
+      background: #222;
+      color: #fff;
+    }
+
+    .register-box input::placeholder {
+      color: #aaa;
+    }
+
+    .register-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #00e676;
+      color: #111;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .register-box button:hover {
+      background: #fff;
+      color: #111;
+      transform: scale(1.05);
+    }
+
+    .extra-links {
+      margin-top: 15px;
+    }
+
+    .extra-links a {
+      color: #00e676;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Create Account</h2>
+    <form method="POST">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Register</button>
+    </form>
+    <div class="extra-links">
+      <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+  </div>
+</body>
+</html>

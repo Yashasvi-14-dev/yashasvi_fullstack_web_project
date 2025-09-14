@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Task - Task Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      background: url("{{ url_for('static', filename='bg.jpg') }}") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .task-box {
+      background: rgba(255,255,255,0.95);
+      padding: 40px;
+      border-radius: 15px;
+      width: 400px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .task-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff6600;
+    }
+
+    .task-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .task-box input, .task-box textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: none;
+      outline: none;
+    }
+
+    .task-box button {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #ffcc00, #ff6600);
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .task-box button:hover {
+      background: linear-gradient(45deg, #fff, #ddd);
+      transform: scale(1.05);
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: #ff6600;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="task-box">
+    <h2>Add New Task</h2>
+    <form method="POST">
+      <input type="text" name="title" placeholder="Task Title" required>
+      <textarea name="description" placeholder="Task Description"></textarea>
+      <button type="submit">Add Task</button>
+    </form>
+    <div class="back-link">
+      <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}
